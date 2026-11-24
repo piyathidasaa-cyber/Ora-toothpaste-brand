@@ -6,7 +6,7 @@
     "type": "toothpaste",
     "size": "30ml",
     "price": 89,
-    "image": "images/ora-fresh-30.webp",
+    "image": "ora-fresh-30.webp",
     "description": "เย็นใสโปร่งเบาในหลอดพกพา ลองความสดชื่นก่อนเลือกเต็มหลอด"
   },
   {
@@ -16,7 +16,7 @@
     "type": "toothpaste",
     "size": "30ml",
     "price": 89,
-    "image": "images/ora-sweet-30.webp",
+    "image": "ora-sweet-30.webp",
     "description": "ความหวานละมุนเบาๆ ในไซส์เล็ก ใส่กระเป๋าได้ทุกวัน"
   },
   {
@@ -26,7 +26,7 @@
     "type": "toothpaste",
     "size": "30ml",
     "price": 89,
-    "image": "images/ora-confident-30.webp",
+    "image": "ora-confident-30.webp",
     "description": "สะอาดนิ่งในไซส์พกพา พร้อมให้คุณมั่นใจก่อนเจอผู้คน"
   },
   {
@@ -36,7 +36,7 @@
     "type": "toothpaste",
     "size": "30ml",
     "price": 89,
-    "image": "images/ora-romance-30.webp",
+    "image": "ora-romance-30.webp",
     "description": "ลองเสน่ห์หวานอุ่นในหลอดเล็กก่อนหลงรัก"
   },
   {
@@ -46,7 +46,7 @@
     "type": "toothpaste",
     "size": "100ml",
     "price": 199,
-    "image": "images/ora-fresh-100.webp",
+    "image": "ora-fresh-100.webp",
     "description": "สดชื่นโปร่งสะอาดทุกเช้า เต็มหลอดสำหรับการใช้ประจำวัน"
   },
   {
@@ -56,7 +56,7 @@
     "type": "toothpaste",
     "size": "100ml",
     "price": 199,
-    "image": "images/ora-sweet-100.webp",
+    "image": "ora-sweet-100.webp",
     "description": "หวานละมุนอบอุ่น ให้ทุกครั้งที่แปรงฟันเป็นช่วงเวลาอ่อนโยน"
   },
   {
@@ -66,7 +66,7 @@
     "type": "toothpaste",
     "size": "100ml",
     "price": 199,
-    "image": "images/ora-confident-100.webp",
+    "image": "ora-confident-100.webp",
     "description": "สะอาดนิ่ง ดูดี น่าเชื่อถือ คู่ใจคนที่พร้อมเจอโลกทุกวัน"
   },
   {
@@ -76,7 +76,7 @@
     "type": "toothpaste",
     "size": "100ml",
     "price": 199,
-    "image": "images/ora-romance-100.webp",
+    "image": "ora-romance-100.webp",
     "description": "หวานมีเสน่ห์ลึกขึ้น ชวนให้จดจำในทุกรอยยิ้ม"
   }
 ]
