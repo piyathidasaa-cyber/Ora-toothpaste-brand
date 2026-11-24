@@ -1,16 +1,99 @@
-const SHEET_URL = 'https://script.google.com/macros/s/AKfycbypc8TD8-SfbWQqed9p8tSo-9UMjdHUB8P6bGPMMKjP_zMo6J5gY-Ai0Wz1IVVyod7Z/exec';
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>สั่งซื้อ — ORA</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .order-wrap { max-width: 560px; margin: 60px auto; padding: 0 20px; }
+    .order-wrap h1 { text-align: center; margin-bottom: 8px; }
+    .order-wrap form { display: flex; flex-direction: column; gap: 16px; margin-top: 32px; }
+    .order-wrap label { display: flex; flex-direction: column; gap: 6px; font-size: 14px; }
+    .order-wrap input, .order-wrap textarea {
+      padding: 12px; border: 1px solid #ccc; font: inherit; background: #fff;
+    }
+    .order-wrap button {
+      padding: 14px; border: 1px solid #1f3a33; background: #1f3a33; color: #fff;
+      font: inherit; letter-spacing: 2px; cursor: pointer;
+    }
+    .order-wrap button:disabled { opacity: .6; cursor: wait; }
+    #msg { color: #b00020; text-align: center; min-height: 20px; }
+  </style>
+</head>
+<body>
+  <header>
+    <nav style="display:flex;justify-content:space-between;align-items:center;padding:24px 30px;border-bottom:1px solid #eee;">
+      <a href="index.html" style="text-decoration:none;color:inherit;letter-spacing:12px;font-size:28px;">ORA</a>
+      <div style="display:flex;gap:32px;">
+        <a href="index.html">หน้าแรก</a>
+        <a href="product.html">สินค้า</a>
+      </div>
+    </nav>
+  </header>
 
-fetch(SHEET_URL, {
-  method: 'POST',
-  mode: 'no-cors',
-  headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-  body: JSON.stringify({
-    name: ชื่อลูกค้า,
-    contact: เบอร์โทรหรือไลน์,
-    items: รายการสินค้า,
-    total: ยอดรวม,
-    note: หมายเหตุ
-  })
-}).finally(() => {
-  window.location.href = 'thankyou.html';
-});
+  <main class="order-wrap">
+    <h1>สั่งซื้อสินค้า</h1>
+    <p style="text-align:center;">กรอกข้อมูลเพื่อให้ทีมงานติดต่อกลับยืนยันคำสั่งซื้อ</p>
+
+    <form id="orderForm">
+      <label>สินค้า
+        <input type="text" id="item" required>
+      </label>
+      <label>จำนวน
+        <input type="number" id="qty" min="1" value="1" required>
+      </label>
+      <label>ชื่อลูกค้า
+        <input type="text" id="name" required>
+      </label>
+      <label>เบอร์โทร / Line
+        <input type="text" id="contact" required>
+      </label>
+      <label>หมายเหตุ (ถ้ามี)
+        <textarea id="note" rows="3"></textarea>
+      </label>
+      <button type="submit" id="submitBtn">ยืนยันคำสั่งซื้อ</button>
+      <div id="msg"></div>
+    </form>
+  </main>
+
+  <script>
+    // วาง Web app URL จาก Google Apps Script ตรงนี้ (ขึ้นต้นด้วย https://script.google.com/macros/s/ ลงท้าย /exec)
+    const SHEET_URL = 'https://script.google.com/macros/s/AKfycbypc8TD8-SfbWQqed9p8tSo-9UMjdHUB8P6bGPMMKjP_zMo6J5gY-Ai0Wz1IVVyod7Z/exec';
+
+    const params = new URLSearchParams(location.search);
+    const price = parseFloat(params.get('price')) || 0; // ถ้าลิงก์มี ?price=89 จะคำนวณยอดรวมให้
+
+    document.getElementById('item').value = params.get('item') || '';
+
+    document.getElementById('orderForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      const msg = document.getElementById('msg');
+      btn.disabled = true;
+      msg.textContent = '';
+
+      const qty = parseInt(document.getElementById('qty').value, 10) || 1;
+      const data = {
+        name: document.getElementById('name').value.trim(),
+        contact: document.getElementById('contact').value.trim(),
+        items: document.getElementById('item').value.trim() + ' x ' + qty,
+        total: price ? price * qty : '',
+        note: document.getElementById('note').value.trim()
+      };
+
+      fetch(SHEET_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(data)
+      }).then(function () {
+        window.location.href = 'thankyou.html';
+      }).catch(function () {
+        btn.disabled = false;
+        msg.textContent = 'ส่งคำสั่งซื้อไม่สำเร็จ กรุณาลองอีกครั้ง';
+      });
+    });
+  </script>
+</body>
+</html>
